@@ -8,6 +8,8 @@ import FAQSection from '../components/FAQSection'
 
 export default function Home() {
   const [currentTestimonial, setCurrentTestimonial] = useState(0)
+  const [touchStart, setTouchStart] = useState(0)
+  const [touchEnd, setTouchEnd] = useState(0)
 
   useEffect(() => {
     const observerOptions = { threshold: 0.2, rootMargin: '0px 0px -100px 0px' }
@@ -33,9 +35,9 @@ export default function Home() {
   ]
 
   const testimonials = [
-    { name: 'Kaif', text: 'After using LYRIC for 3 months, my hair fall has reduced significantly. The natural ingredients really work!', rating: 5, image: '/images/kaif.jpg' },
-    { name: 'Rajesh Kumar', text: 'Amazing results! My hair is more resilient and the smell of fruits lasts throughout the day. Highly recommend this herbal shampoo.', rating: 5, image: '/images/kaif.jpg' },
-    { name: 'Anita Patel', text: 'Best investment for my hair care routine. The sulfate-free formula is gentle yet effective. My scalp feels healthier than ever.', rating: 5, image: '/images/kaif.jpg'}
+    { name: 'Rajesh Kumar', text: 'After using LYRIC for 3 months, my hair fall has reduced significantly. The natural ingredients really work!', rating: 5, image: '/images/Rajesh Kumar.png' },
+    { name: 'Anita Patel', text: 'Amazing results! My hair is more resilient and the smell of fruits lasts throughout the day. Highly recommend this herbal shampoo.', rating: 5, image: '/images/Anita patel.png' },
+    { name: 'Muhammad Haris', text: 'Best investment for my hair care routine. The sulfate-free formula is gentle yet effective. My scalp feels healthier than ever.', rating: 5, image: '/images/Muhammad Haris.jpg'}
   ]
 
   const benefits = [
@@ -44,6 +46,35 @@ export default function Home() {
     { title: 'All Hair Types', desc: 'Perfect for every hair texture and type', image: '/images/all-hair-types.png' },
     { title: 'Gentle & Effective', desc: 'Powerful results with gentle care', image: '/images/Effective&Gentle.png' }
   ]
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentTestimonial((prev) => (prev + 1) % testimonials.length)
+    }, 4000)
+    return () => clearInterval(interval)
+  }, [])
+
+  const handleTouchStart = (e) => {
+    setTouchEnd(0)
+    setTouchStart(e.touches[0].clientX)
+  }
+
+  const handleTouchMove = (e) => {
+    setTouchEnd(e.touches[0].clientX)
+  }
+
+  const handleTouchEnd = () => {
+    if (!touchStart || !touchEnd) return
+    const distance = touchStart - touchEnd
+    
+    if (Math.abs(distance) > 50) {
+      if (distance > 0) {
+        setCurrentTestimonial((prev) => (prev + 1) % testimonials.length)
+      } else {
+        setCurrentTestimonial((prev) => (prev - 1 + testimonials.length) % testimonials.length)
+      }
+    }
+  }
 
   return (
     <PremiumLayout>
@@ -255,7 +286,7 @@ export default function Home() {
       </section>
 
       {/* Bottle Showcase */}
-      <section className="py-24 bg-black">
+      <section id="bottle-showcase" className="py-24 bg-black">
         <div className="container mx-auto px-6 text-center">
           <h2 className="section-title fade-in">
             Premium Bottle Design
@@ -284,7 +315,12 @@ export default function Home() {
           </h2>
           
           <div className="max-w-4xl mx-auto">
-            <div className="premium-card fade-in text-center overflow-hidden">
+            <div 
+              className="premium-card fade-in text-center overflow-hidden cursor-grab active:cursor-grabbing"
+              onTouchStart={handleTouchStart}
+              onTouchMove={handleTouchMove}
+              onTouchEnd={handleTouchEnd}
+            >
               <div className="transition-all duration-700 ease-in-out transform" key={currentTestimonial}>
                 <div className="mb-6">
                   <img 
