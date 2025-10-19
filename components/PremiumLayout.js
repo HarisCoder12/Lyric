@@ -37,7 +37,7 @@ export default function PremiumLayout({ children, title = 'LYRIC - Premium Hair 
               {['Home', 'Product', 'About', 'Why Choose', 'Contact'].map((item) => (
                 <a
                   key={item}
-                  href={`#${item.toLowerCase().replace(' ', '-')}`}
+                  href={item === 'Product' ? '#bottle-showcase' : `#${item.toLowerCase().replace(' ', '-')}`}
                   className="text-white hover:text-gold transition-colors duration-300 font-medium tracking-wide"
                 >
                   {item}
@@ -74,7 +74,7 @@ export default function PremiumLayout({ children, title = 'LYRIC - Premium Hair 
               {['Home', 'Product', 'About', 'Why Choose', 'Contact'].map((item) => (
                 <a
                   key={item}
-                  href={`#${item.toLowerCase().replace(' ', '-')}`}
+                  href={item === 'Product' ? '#bottle-showcase' : `#${item.toLowerCase().replace(' ', '-')}`}
                   onClick={() => setMobileMenuOpen(false)}
                   className="text-white hover:text-gold transition-colors duration-300 font-medium tracking-wide py-2 border-b border-gray-700 last:border-b-0"
                 >
@@ -120,7 +120,7 @@ export default function PremiumLayout({ children, title = 'LYRIC - Premium Hair 
               <h4 className="text-gold font-semibold mb-6 text-lg">Connect With Us</h4>
               <div className="flex justify-center md:justify-start space-x-6">
                 <a
-                  href="https://www.facebook.com/lyrichaircare"
+                  href="https://www.facebook.com/lyric_haircare"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="w-12 h-12 bg-gradient-to-br from-gold to-darkGold rounded-full flex items-center justify-center text-black hover:scale-110 hover:shadow-lg hover:shadow-gold/50 transition-all duration-300"
@@ -128,23 +128,16 @@ export default function PremiumLayout({ children, title = 'LYRIC - Premium Hair 
                   <i className="fab fa-facebook-f"></i>
                 </a>
                 <a
-                  href="https://www.instagram.com/lyrichaircare"
+                  href="https://www.instagram.com/lyric_haircare"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="w-12 h-12 bg-gradient-to-br from-gold to-darkGold rounded-full flex items-center justify-center text-black hover:scale-110 hover:shadow-lg hover:shadow-gold/50 transition-all duration-300"
                 >
                   <i className="fab fa-instagram"></i>
                 </a>
+
                 <a
-                  href="https://www.twitter.com/lyrichaircare"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-12 h-12 bg-gradient-to-br from-gold to-darkGold rounded-full flex items-center justify-center text-black hover:scale-110 hover:shadow-lg hover:shadow-gold/50 transition-all duration-300"
-                >
-                  <i className="fab fa-twitter"></i>
-                </a>
-                <a
-                  href="https://www.youtube.com/lyrichaircare"
+                  href="https://www.youtube.com/@lyricherbal"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="w-12 h-12 bg-gradient-to-br from-gold to-darkGold rounded-full flex items-center justify-center text-black hover:scale-110 hover:shadow-lg hover:shadow-gold/50 transition-all duration-300"
